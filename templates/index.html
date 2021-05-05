@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>Home</title>
+    <style>
+	img {
+  	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+	width: 35%
+	}
+    </style>
+  </head>
+  <body>
+    <script>
+    function showPicture() {
+      var sourceOfPicture = "{{ url_for('video_feed') }}";
+      var img = document.getElementById('bg')
+      img.src = sourceOfPicture.replace('90x90', '225x225');
+      img.style.display = "block";
+    } 
+  </script>
+    <h1 align="center">Real-Time Object Detection on Conveyor Belt</h1>
+    <form action="{{ url_for('setting_inputs') }}" method="post" >
+      <label for='model'>Weight Name</label>
+      <input type="text" id="weight" name="weight">
+      <label for='file'>File Name</label>
+      <input type="text" id="file" name="file">
+      <label for='type'>Image or Video</label>
+      <input type="text" id='type' name='type'><br>
+      <input type="submit" value="Load weights & file">
+    </form>
+    <button onclick="showPicture()">Start Object Detection</button>
+     <!--<label for='model'>Model Name</label><br> 
+      <img id="bg" class="center" src="{{ url_for('video_feed') }}" width="1130"  height="636">
+     screen resolution 1920 X 1080 
+    <input type=text name="yolo">
+    width=1130
+    -->  
+<div>
+     <img id="bg" class="center" src="http://img.tesco.com/Groceries/pi/118/5000175411118/IDShot_90x90.jpg"  style="display:none;width:80%">
+       
+    </div>
+
+  </body>
+</html>
