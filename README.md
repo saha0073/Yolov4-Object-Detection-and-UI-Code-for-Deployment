@@ -13,13 +13,20 @@ A wide range of custom functions & UI code for the deployment of real-time detec
 ## A demo of the detection & analysis of objects on conveyor belt!
 <p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/pizza_radmaker1.gif" style="width:80%"\></p>
 
-## A screenshot of the UI that detects defective items!
-<p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/ui.png"\></p>
-
 ## Currently Supported Custom Functions and Flags
 * Counting Objects (total objects and per class)
 * Print Info About Each Detection (class, confidence, bounding box coordinates)
 * Time-series plot for the detailed analysis (Creates the time-series plot on the object count in each frame)
+
+
+## Models
+Here we have 3 models for 3 different use cases. 
+* ./checkpoints/yolov4-416: For pizza detection on conveyor belt. The original Darknet weights, trained on COCO dataset.
+* ./checkpoints/yolov4-custom_tire_2000-416: For tire detection on conveyor belt. Trained on 1500 tire images, collected from Google Open Images dataset. 
+* ./checkpoints/yolov4-obj_cup_last-416: For broken cups detection from good ones. Downloaded 300 broken cups & good cups from Google images, labeled using labelbox, and then trained for 2 classes.
+
+Due to large size of the model weights those are not uploaeded here. 
+
 
 ## Getting Started
 ### Conda (Recommended)
@@ -47,11 +54,19 @@ pip install -r requirements-gpu.txt
 ```
 # Run yolov4 on video
 python main_ui.py 
+```
 
 # The Flask app will be running from 5000 port, so please go to `localhost:5000` in your browser
-# Import the weights and image/video: So `./checkpoints/yolov4-416` in place of weights, `./data/images/pizza_radmaker2.png` in file and press Load weights & file button, it will import the yolov4 weights and the pizza video to the backend. 
-# Press start object detection, the object detection will start in GUI in few seconds.
-```
+# Import the weights and image/video: You can use `./checkpoints/yolov4-416` in place of weights, `./data/images/pizza_radmaker2.png` in file and press Load weights & file button, it will import the yolov4 weights and the pizza video in the backend. 
+# Press start object detection button, the object detection will start in GUI in a few seconds.
+
+
+
+## A screenshot of the UI that detects defective items!
+<p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/ui.png"\></p>
+
+This project has been inspired by [AIGuys](https://github.com/theAIGuysCode), so I like to thank him. If you have any question please feel free to connect me in [Linkedin](https://www.linkedin.com/in/subhodip-saha-li/)
+
 
 
 
