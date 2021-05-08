@@ -231,7 +231,8 @@ def format_boxes(bboxes, image_height, image_width):
     return bboxes
 
 def draw_bbox(image, bboxes, count_object, time_count, is_time_count, info = False, counted_classes = None, show_label=True,  allowed_classes=list(read_class_names(cfg.YOLO.CLASSES).values()), read_plate = False):
-    
+    #print('counted_classes at begin in utils',counted_classes)
+
     classes = read_class_names(cfg.YOLO.CLASSES)
     num_classes = len(classes)
     image_h, image_w, _ = image.shape
@@ -297,14 +298,15 @@ def draw_bbox(image, bboxes, count_object, time_count, is_time_count, info = Fal
 
                 cv2.putText(image, bbox_mess, (c1[0], np.float32(c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX,
                         fontScale, (0, 0, 0), bbox_thick // 2, lineType=cv2.LINE_AA)
-            
+
+            #print('counted_classes',counted_classes)
             if counted_classes != None:
                 height_ratio = int(image_h / 25)
                 offset = offset_base
                 #for key, value in counted_classes.items():
                 i=0
                 for key, value in counted_classes.items():    
-                    print('ilater', i, key, value)
+                    #print('ilater', i, key, value)
                     if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
                         #continue
                         cv2.putText(image, "{}s detected in this frame: {}".format(key, value), (5, offset),
@@ -330,6 +332,9 @@ def draw_bbox(image, bboxes, count_object, time_count, is_time_count, info = Fal
         #imgplt = cv2.cvtColor(imgplt,cv2.COLOR_RGB2BGR) 
         #im_v_resize = vconcat_resize_min([image, imgplt])   #vertical concatanation
         im_v_resize = hconcat_resize_min([image, imgplt])    #horizontal concatanation
+        #print('width of plt',imgplt.shape)
+        #print('width of image',image.shape)
+        #print('width of concat',im_v_resize.shape)
         return im_v_resize
     
     return image

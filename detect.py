@@ -39,11 +39,24 @@ flags.DEFINE_boolean('info', False, 'print info on detections')
 flags.DEFINE_boolean('crop', False, 'crop detections from images')
 flags.DEFINE_boolean('ocr', False, 'perform generic OCR on detection regions')
 flags.DEFINE_boolean('plate', False, 'perform license plate recognition')
+flags.DEFINE_boolean('is_time_count',False,    'make time series plot')
 
 def main(_argv):
 
     #defining dictionary to hold total object counts
     object_count={}
+    time_count={}
+    
+    frame_num=0
+
+    #modify config file
+    if FLAGS.weights=='./checkpoints/yolov4-416':
+        cfg.YOLO.CLASSES="./data/classes/coco.names"
+    elif FLAGS.weights=='./checkpoints/yolov4-custom_tire_2000-416':
+        cfg.YOLO.CLASSES="./data/classes/custom_tire.names"
+    elif FLAGS.weights=='./checkpoints/yolov4-obj_cup_last-416':
+        cfg.YOLO.CLASSES="./data/classes/custom_cup.names"
+
     # read in all class names from config
     class_names = utils.read_class_names(cfg.YOLO.CLASSES)
 
@@ -52,8 +65,12 @@ def main(_argv):
 
     if 'coco' in cfg.YOLO.CLASSES:   #for coco dataset, only considering pizza
         object_count['pizza']=0
+        time_count['x']=[]
+        time_count['y']=[]
         print('allowed', cfg.YOLO.CLASSES  )
     else:
+        time_count['x']=[]
+        time_count['y']=[]
         for ele in allowed_classes:
             object_count[ele] =0
 
@@ -165,7 +182,9 @@ def main(_argv):
                 if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
                    #continue
                    object_count[key]=object_count[key]+value   
-            image = utils.draw_bbox(original_image, pred_bbox, object_count, FLAGS.info, counted_classes, allowed_classes=allowed_classes, read_plate = FLAGS.plate)
+                   time_count['x'].append(frame_num)
+                   time_count['y'].append(value)
+            image = utils.draw_bbox(original_image, pred_bbox, object_count, time_count, FLAGS.is_time_count, FLAGS.info, counted_classes, allowed_classes=allowed_classes, read_plate = FLAGS.plate)
         else:
             image = utils.draw_bbox(original_image, pred_bbox, FLAGS.info, allowed_classes=allowed_classes, read_plate = FLAGS.plate)
         

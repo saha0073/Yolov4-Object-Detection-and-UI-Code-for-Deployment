@@ -2,8 +2,10 @@ from flask import Flask, render_template, Response, request, session
 from detect_video_ui import VideoCamera
 from detect_img_ui import ImageCamera
 from flask_session import Session
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 class inputs(object):
     def __init__(self):
@@ -35,7 +37,14 @@ def setting_inputs():
     file=request.form['file']
     curr_input.weight=weight
     curr_input.file=file
-    curr_input.type=request.form['type']
+    if 'video' in curr_input.file:
+        curr_input.type='video'
+    elif 'image' in curr_input.file:
+        curr_input.type='image'
+    else:
+        print('Please check the directory of the file')
+
+    #curr_input.type=request.form['type']
     print('weight_input',curr_input.weight)
     print('file_input',curr_input.file)
     print('file_type',curr_input.type)

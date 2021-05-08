@@ -35,10 +35,22 @@ flags.DEFINE_boolean('info', False, 'print info on detections')
 flags.DEFINE_boolean('crop', False, 'crop detections from images')
 flags.DEFINE_boolean('plate', False, 'perform license plate recognition')
 flags.DEFINE_boolean('tabulation', False, 'print tabulation on screen')
+flags.DEFINE_boolean('is_time_count',True, 'make time series plot')
 
 def main(_argv):
     #defining dictionary to hold total object counts
     object_count={}
+    time_count={}
+    
+
+    #modify config file
+    if FLAGS.weights=='./checkpoints/yolov4-416':
+        cfg.YOLO.CLASSES="./data/classes/coco.names"
+    elif FLAGS.weights=='./checkpoints/yolov4-custom_tire_2000-416':
+        cfg.YOLO.CLASSES="./data/classes/custom_tire.names"
+    elif FLAGS.weights=='./checkpoints/yolov4-obj_cup_last-416':
+        cfg.YOLO.CLASSES="./data/classes/custom_cup.names"
+
     # read in all class names from config
     class_names = utils.read_class_names(cfg.YOLO.CLASSES)
 
@@ -47,8 +59,12 @@ def main(_argv):
 
     if 'coco' in cfg.YOLO.CLASSES:   #for coco dataset, only considering pizza
         object_count['pizza']=0
+        time_count['x']=[]
+        time_count['y']=[]
         print('allowed', cfg.YOLO.CLASSES  )
     else:
+        time_count['x']=[]
+        time_count['y']=[]
         for ele in allowed_classes:
             object_count[ele] =0
 
@@ -87,7 +103,11 @@ def main(_argv):
         height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
         fps = int(vid.get(cv2.CAP_PROP_FPS))
         codec = cv2.VideoWriter_fourcc(*FLAGS.output_format)
-        out = cv2.VideoWriter(FLAGS.output, codec, fps, (width, height))
+        if FLAGS.is_time_count:
+            out = cv2.VideoWriter(FLAGS.output, codec, fps, (width+640, height))  #the width of plt
+        else: 
+            out = cv2.VideoWriter(FLAGS.output, codec, fps, (width, height))
+
 
     frame_num = 0
     while True:
@@ -174,10 +194,13 @@ def main(_argv):
                 print("Number of {}s: {}".format(key, value))
                 if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
                    #continue
-                   object_count[key]=object_count[key]+value    
+                   object_count[key]=object_count[key]+value
+                   time_count['x'].append(frame_num)
+                   time_count['y'].append(value)
+    
                    #print("# of time {}s detected so far: {}".format(key, object_count[key]))
 
-            image = utils.draw_bbox(frame, pred_bbox, object_count, FLAGS.info, counted_classes, allowed_classes=allowed_classes, read_plate=FLAGS.plate)
+            image = utils.draw_bbox(frame, pred_bbox, object_count, time_count, FLAGS.is_time_count, FLAGS.info, counted_classes, allowed_classes=allowed_classes, read_plate=FLAGS.plate)
         else:
             image = utils.draw_bbox(frame, pred_bbox, FLAGS.info, allowed_classes=allowed_classes, read_plate=FLAGS.plate)
         
