@@ -25,7 +25,7 @@ Here we have 3 models for 3 different use cases.
 * ./checkpoints/yolov4-custom_tire_2000-416: For tire detection on conveyor belt. Trained on 1500 tire images, collected from Google Open Images dataset. 
 * ./checkpoints/yolov4-obj_cup_last-416: For broken cups detection from good ones. Downloaded 300 broken cups & good cups from Google images, labeled using labelbox, and then trained for 2 classes.
 
-Due to large size of the model weights those are not uploaeded here. 
+The original Darknet model weights are available online. Due to large size of the other model weights those are not uploaeded here, if you want the models weights  you can reach out to me. 
 
 
 ## Getting Started
@@ -57,9 +57,9 @@ python main_ui.py
 ```
 
 ## GUI Navigation
-The Flask app will be running from 5000 port, so please go to `localhost:5000` in your browser
+* The Flask app will be running from 5000 port, so please go to `localhost:5000` in your browser
 * Import the weights and image/video: You can use `./checkpoints/yolov4-416` in place of weights, `./data/images/pizza_radmaker2.png` in file and press Load weights & file button, it will import the yolov4 weights and the pizza video in the backend. 
-Press start object detection button, the object detection will start in GUI in a few seconds.
+* Press start object detection button, the object detection will start in GUI in a few seconds.
 
 
 
