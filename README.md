@@ -11,7 +11,7 @@ A wide range of custom functions & UI code for the deployment of real-time detec
 * GUI techniques: Flask, HTML, JavaScript, RTSP.   
 
 ## A demo of the detection & analysis of objects on conveyor belt!
-<p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/pizza_radmaker1.gif"\></p>
+<p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/pizza_radmaker1.gif" style="width:40%"\></p>
 
 ## A screenshot of the UI that detects defective items!
 <p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/ui.png"\></p>
