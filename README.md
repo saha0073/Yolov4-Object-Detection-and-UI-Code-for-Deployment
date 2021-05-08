@@ -1,7 +1,7 @@
 # yolov4-Object-Detection-and-Custom-UI
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
-A wide range of custom functions and UI code for detection & analysis of objects in conveyor belt & defective items using YOLOv4.
+A wide range of custom functions & UI code for the deployment of real-time detection & analysis of objects using YOLOv4. Here the detection & analysis of objects on conveyor belt & defective items are presented.
 
 ## Skills Employed
 * Modeling Techniques: CNN object detection, Darknet53, Yolov4, Transfer Learning, Computer Vision.
@@ -11,7 +11,7 @@ A wide range of custom functions and UI code for detection & analysis of objects
 * GUI techniques: Flask, HTML, JavaScript, RTSP.   
 
 ## A demo of the custom function in action!
-<!--<p align="center"><img src="data/helpers/object_counter.gif"\></p>-->
+<p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/pizza_radmaker1.gif"\></p>
 
 ## Introduction
 
