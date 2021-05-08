@@ -10,8 +10,11 @@ A wide range of custom functions & UI code for the deployment of real-time detec
 * Libraries: Tensorflow 2.3.0, Keras, Scikit-Learn, matplotlib.
 * GUI techniques: Flask, HTML, JavaScript, RTSP.   
 
-## A demo of the custom function in action!
+## A demo of the detection & analysis of objects on conveyor belt!
 <p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/pizza_radmaker1.gif"\></p>
+
+## A screenshot of the UI that detects defective items!
+<p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/ui.png"\></p>
 
 ## Introduction
 
