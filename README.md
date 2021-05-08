@@ -41,8 +41,17 @@ pip install -r requirements.txt
 
 # TensorFlow GPU
 pip install -r requirements-gpu.txt
+```
 
 ## YOLOv4 Using Tensorflow (tf, .pb model)
+```
+# Run yolov4 on video
+python main_ui.py 
+
+# The Flask app will be running from 5000 port, so please go to `localhost:5000` in your browser
+# Import the weights and image/video: So `./checkpoints/yolov4-416` in place of weights, `./data/images/pizza_radmaker2.png` in file and press Load weights & file button, it will import the yolov4 weights and the pizza video to the backend. 
+# Press start object detection, the object detection will start in GUI in few seconds.
+```
 
 
 
