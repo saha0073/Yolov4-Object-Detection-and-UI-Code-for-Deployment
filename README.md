@@ -17,10 +17,32 @@ A wide range of custom functions & UI code for the deployment of real-time detec
 <p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/ui.png"\></p>
 
 ## Currently Supported Custom Functions and Flags
-* [x] [Counting Objects (total objects and per class)]
-* [x] [Print Info About Each Detection (class, confidence, bounding box coordinates)]
-* [x] [Time-series plot for the detailed analysis]
+* Counting Objects (total objects and per class)
+* Print Info About Each Detection (class, confidence, bounding box coordinates)
+* Time-series plot for the detailed analysis (Creates the time-series plot on the object count in each frame)
 
+## Getting Started
+### Conda (Recommended)
+
+```bash
+# Tensorflow CPU
+conda env create -f conda-cpu.yml
+conda activate yolov4-cpu
+
+# Tensorflow GPU
+conda env create -f conda-gpu.yml
+conda activate yolov4-gpu
+```
+
+### Pip
+```bash
+# TensorFlow CPU
+pip install -r requirements.txt
+
+# TensorFlow GPU
+pip install -r requirements-gpu.txt
+
+## YOLOv4 Using Tensorflow (tf, .pb model)
 
 
 
