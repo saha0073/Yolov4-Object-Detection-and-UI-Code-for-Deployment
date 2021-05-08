@@ -60,6 +60,7 @@ python main_ui.py
 * The Flask app will be running from 5000 port, so please go to `localhost:5000` in your browser
 * Import the weights and image/video: You can use `./checkpoints/yolov4-416` in place of weights, `./data/images/pizza_radmaker2.png` in file and press Load weights & file button, it will import the yolov4 weights and the pizza video in the backend. 
 * Press start object detection button, the object detection will start in GUI in a few seconds.
+* It creates the time-series analysis plot for video input files, this feature can be switched on/off by setting `is_time_count` to `True/False` in main_ui.py.
 
 
 
