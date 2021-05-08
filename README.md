@@ -25,7 +25,7 @@ Here we have 3 models for 3 different use cases.
 * `./checkpoints/yolov4-custom_tire_2000-416`: For tire detection on conveyor belt. Trained on 1500 tire images, collected from Google Open Images dataset. 
 * `./checkpoints/yolov4-obj_cup_last-416`: For broken cups detection from good ones. Downloaded 300 broken cups & good cups from Google images, labeled using labelbox, and then trained for 2 classes.
 
-The original Darknet model weights are available online. Due to large size of the other model weights those are not uploaeded here, if you want the models weights  you can reach out to me. 
+The original Darknet model weights are available online. Due to large size of the other model weights those are not uploaeded here, if you want the models weights or training datasets you can reach out to me. 
 
 
 ## Getting Started
