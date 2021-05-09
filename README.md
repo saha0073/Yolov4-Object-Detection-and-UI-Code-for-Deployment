@@ -30,6 +30,7 @@ The original Darknet model weights are available online. Due to large size of th
 
 ## Getting Started
 
+
 <!--### Conda (Recommended)
 
 ```bash
@@ -51,9 +52,10 @@ pip install -r requirements.txt
 pip install -r requirements-gpu.txt
 ``` -->
 
-## YOLOv4 Using Tensorflow (tf, .pb model)
+## Run the UI application
 ```
-# Run yolov4 on video
+# Install the necessary dependencies from `requirements.txt`
+# Launch the Flask app
 python main_ui.py 
 ```
 
