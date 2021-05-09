@@ -29,7 +29,8 @@ The original Darknet model weights are available online. Due to large size of th
 
 
 ## Getting Started
-### Conda (Recommended)
+
+<!--### Conda (Recommended)
 
 ```bash
 # Tensorflow CPU
@@ -48,7 +49,7 @@ pip install -r requirements.txt
 
 # TensorFlow GPU
 pip install -r requirements-gpu.txt
-```
+``` -->
 
 ## YOLOv4 Using Tensorflow (tf, .pb model)
 ```
