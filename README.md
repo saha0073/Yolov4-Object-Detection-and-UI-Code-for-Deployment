@@ -29,7 +29,11 @@ The original Darknet model weights are available online. Due to large size of th
 
 
 ## Getting Started
-
+### Folder structure
+* `main_ui.py` is the Flask app that launches the UI application and calls necessary backend functions
+* `./templates/index.html` is responsible for the UI 
+* If the user provides an image as input `detect_img_ui.py` is called for object detection in the image, and if user provides a video as input `detect_video_ui.py` is called for object detection in the video.
+* `./saved_detections/` consists of quite a few examples of yolov4 detections on pizza & tire on conveyor belt and broken cups.    
 
 <!--### Conda (Recommended)
 
@@ -50,12 +54,13 @@ pip install -r requirements.txt
 
 # TensorFlow GPU
 pip install -r requirements-gpu.txt
-``` -->
+```
+-->
 
 ## Run the UI application
 ```
-# Install the necessary dependencies from `requirements.txt`
-# Launch the Flask app
+### Install the necessary dependencies from `requirements.txt`
+### Launch the Flask app
 python main_ui.py 
 ```
 
