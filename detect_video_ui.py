@@ -142,7 +142,7 @@ class VideoCamera(object):
             self.infer = saved_model_loaded.signatures['serving_default']
             #print('infer', self.infer)
 
-        print('img1',self.image_path)
+        print('img1',self.video_path)
         #sess = tf.compat.v1.Session(graph=tf.compat.v1.get_default_graph(), config=session_conf)
         
 

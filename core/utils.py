@@ -309,7 +309,7 @@ def draw_bbox(image, bboxes,  time_count, is_time_count, info = False, counted_c
                     #print('ilater', i, key, value)
                     if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
                         #continue
-                        cv2.putText(image, "{}s detected in this frame: {}".format(key, value), (5, offset),
+                        cv2.putText(image, "{}s detected: {}".format(key, value), (5, offset),
                             cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 255, 0), 2)
                         #pass
                         offset += height_ratio
@@ -340,9 +340,9 @@ def draw_bbox(image, bboxes,  time_count, is_time_count, info = False, counted_c
             #imgplt = cv2.cvtColor(imgplt,cv2.COLOR_RGB2BGR) 
             #im_v_resize = vconcat_resize_min([image, imgplt])   #vertical concatanation
             im_v_resize = hconcat_resize_min([image, imgplt])    #horizontal concatanation
-            print('width of plt',imgplt.shape)
-            print('width of image',image.shape)
-            print('width of concat',im_v_resize.shape)
+            #print('width of plt',imgplt.shape)
+            #print('width of image',image.shape)
+            #print('width of concat',im_v_resize.shape)
         
         elif len(time_count)==2:
 
@@ -363,9 +363,9 @@ def draw_bbox(image, bboxes,  time_count, is_time_count, info = False, counted_c
             imgplt  = imgplt.reshape(fig.canvas.get_width_height()[::-1] + (3,))
             plt.close()
             im_v_resize = hconcat_resize_min([image, imgplt])    #horizontal concatanation
-            print('width of plt',imgplt.shape)
-            print('width of image',image.shape)
-            print('width of concat',im_v_resize.shape)
+            #print('width of plt',imgplt.shape)
+            #print('width of image',image.shape)
+            #print('width of concat',im_v_resize.shape)
         
         else:
             print('check no of classes')
