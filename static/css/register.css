@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins);
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  width: 35%
+  }
+.light-blue-gradient {
+  background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.form-upload {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+  }
+  .form-upload .checkbox {
+    font-weight: 400;
+  }
+  .form-upload .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-upload .form-control:focus {
+    z-index: 2;
+  }
+
+  img {
+  	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+	width: 35%
+	}

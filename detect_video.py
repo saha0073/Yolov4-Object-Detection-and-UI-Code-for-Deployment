@@ -39,10 +39,10 @@ flags.DEFINE_boolean('is_time_count',True, 'make time series plot')
 
 def main(_argv):
     #defining dictionary to hold total object counts
-    object_count={}
+    #object_count={}
     time_count={}
     
-
+    print('started object detection')
     #modify config file
     if FLAGS.weights=='./checkpoints/yolov4-416':
         cfg.YOLO.CLASSES="./data/classes/coco.names"
@@ -58,15 +58,25 @@ def main(_argv):
     allowed_classes = list(class_names.values())
 
     if 'coco' in cfg.YOLO.CLASSES:   #for coco dataset, only considering pizza
-        object_count['pizza']=0
-        time_count['x']=[]
-        time_count['y']=[]
-        print('allowed', cfg.YOLO.CLASSES  )
+        #object_count['pizza']=0
+        time_count['pizza']={}
+        time_count['pizza']['x']=[]
+        time_count['pizza']['y']=[]
+        #print('allowed', cfg.YOLO.CLASSES  )
+    elif 'cup' in cfg.YOLO.CLASSES: 
+        time_count['cup']={}
+        time_count['defective_cup']={}
+        time_count['cup']['x']=[]
+        time_count['cup']['y']=[]
+        time_count['defective_cup']['x']=[]
+        time_count['defective_cup']['y']=[]
+
     else:
-        time_count['x']=[]
-        time_count['y']=[]
-        for ele in allowed_classes:
-            object_count[ele] =0
+        time_count['tire']={}
+        time_count['tire']['x']=[]
+        time_count['tire']['y']=[]
+        #for ele in allowed_classes:
+            #object_count[ele] =0
 
     config = ConfigProto()
     config.gpu_options.allow_growth = True
@@ -99,12 +109,16 @@ def main(_argv):
 
     if FLAGS.output:
         # by default VideoCapture returns float instead of int
+        print('output',FLAGS.output)
         width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
         fps = int(vid.get(cv2.CAP_PROP_FPS))
         codec = cv2.VideoWriter_fourcc(*FLAGS.output_format)
         if FLAGS.is_time_count:
-            out = cv2.VideoWriter(FLAGS.output, codec, fps, (width+640, height))  #the width of plt
+            if 'cup' in cfg.YOLO.CLASSES: 
+                out = cv2.VideoWriter(FLAGS.output, codec, fps, (width+621, height))  #in cup the video is wide, so this modification
+            else:
+                out = cv2.VideoWriter(FLAGS.output, codec, fps, (width+640, height))  #the width of plt
         else: 
             out = cv2.VideoWriter(FLAGS.output, codec, fps, (width, height))
 
@@ -190,17 +204,25 @@ def main(_argv):
             # count objects found
             counted_classes = count_objects(pred_bbox, by_class = True, allowed_classes=allowed_classes)
             # loop through dict and print
+            print('counted_classes',counted_classes)
+            for key in time_count:
+                if key in counted_classes:
+                    time_count[key]['y'].append(counted_classes[key])
+                else:
+                    time_count[key]['y'].append(0)
+                time_count[key]['x'].append(frame_num) 
+               
             for key, value in counted_classes.items():
                 print("Number of {}s: {}".format(key, value))
-                if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
+                #if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
                    #continue
-                   object_count[key]=object_count[key]+value
-                   time_count['x'].append(frame_num)
-                   time_count['y'].append(value)
+                   #object_count[key]=object_count[key]+value
+                   #time_count['x'].append(frame_num)
+                   #time_count['y'].append(value)
     
                    #print("# of time {}s detected so far: {}".format(key, object_count[key]))
 
-            image = utils.draw_bbox(frame, pred_bbox, object_count, time_count, FLAGS.is_time_count, FLAGS.info, counted_classes, allowed_classes=allowed_classes, read_plate=FLAGS.plate)
+            image = utils.draw_bbox(frame, pred_bbox, time_count, FLAGS.is_time_count, FLAGS.info, counted_classes, allowed_classes=allowed_classes, read_plate=FLAGS.plate)
         else:
             image = utils.draw_bbox(frame, pred_bbox, FLAGS.info, allowed_classes=allowed_classes, read_plate=FLAGS.plate)
         

@@ -37,12 +37,18 @@ def setting_inputs():
     file=request.form['file']
     curr_input.weight=weight
     curr_input.file=file
-    if 'video' in curr_input.file:
+    video_ls=['mp4','avi']
+    img_ls=['jpg', 'png'] 
+
+    if 'mp4' in curr_input.file or 'avi' in curr_input.file:
         curr_input.type='video'
-    elif 'image' in curr_input.file:
+        curr_input.file='./data/video/'+curr_input.file
+    elif 'jpg' in curr_input.file or 'png' in curr_input.file:
         curr_input.type='image'
+        curr_input.file='./data/images/'+curr_input.file
     else:
-        print('Please check the directory of the file')
+        print('Please check the file extension')
+
 
     #curr_input.type=request.form['type']
     print('weight_input',curr_input.weight)
@@ -56,6 +62,7 @@ def setting_inputs():
 def video_feed():
     #input=r
     #print('image_flask',model)
+    print('started object detection')
     if curr_input.type=='video':
         cam_ins=VideoCamera(curr_input.weight,curr_input.file)
     elif  curr_input.type=='image':

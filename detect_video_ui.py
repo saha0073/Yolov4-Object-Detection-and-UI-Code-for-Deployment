@@ -73,7 +73,7 @@ class VideoCamera(object):
             self.vid = cv2.VideoCapture(self.video_path)
 
         #defining dictionary to hold total object counts
-        self.object_count={}
+        #self.object_count={}
         self.time_count={}
         #self.num_frame=0
 
@@ -91,16 +91,27 @@ class VideoCamera(object):
         # by default allow all classes in .names file
         allowed_classes = list(class_names.values())
 
+
         if 'coco' in cfg.YOLO.CLASSES:   #for coco dataset, only considering pizza
-            self.object_count['pizza']=0
-            self.time_count['x']=[]
-            self.time_count['y']=[]
-            print('allowed', cfg.YOLO.CLASSES  )
+            #object_count['pizza']=0
+            self.time_count['pizza']={}
+            self.time_count['pizza']['x']=[]
+            self.time_count['pizza']['y']=[]
+            #print('allowed', cfg.YOLO.CLASSES  )
+        elif 'cup' in cfg.YOLO.CLASSES: 
+            self.time_count['cup']={}
+            self.time_count['defective_cup']={}
+            self.time_count['cup']['x']=[]
+            self.time_count['cup']['y']=[]
+            self.time_count['defective_cup']['x']=[]
+            self.time_count['defective_cup']['y']=[]
+
         else:
-            self.time_count['x']=[]
-            self.time_count['y']=[]
-            for ele in allowed_classes:
-                self.object_count[ele] =0
+            self.time_count['tire']={}
+            self.time_count['tire']['x']=[]
+            self.time_count['tire']['y']=[]
+            #for ele in allowed_classes:
+                #object_count[ele] =0
 
         config = ConfigProto()
         config.gpu_options.allow_growth = True
@@ -131,7 +142,7 @@ class VideoCamera(object):
             self.infer = saved_model_loaded.signatures['serving_default']
             #print('infer', self.infer)
 
-        
+        print('img1',self.image_path)
         #sess = tf.compat.v1.Session(graph=tf.compat.v1.get_default_graph(), config=session_conf)
         
 
@@ -240,18 +251,25 @@ class VideoCamera(object):
         if self.count:
             # count objects found
             counted_classes = count_objects(pred_bbox, by_class = True, allowed_classes=allowed_classes)
+            #print('counted_classes',counted_classes)
+            for key in self.time_count:
+                if key in counted_classes:
+                    self.time_count[key]['y'].append(counted_classes[key])
+                else:
+                    self.time_count[key]['y'].append(0)
+                self.time_count[key]['x'].append(self.frame_num) 
             # loop through dict and print
             for key, value in counted_classes.items():
                 print("Number of {}s: {}".format(key, value))
-                if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
+                #if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
                 #continue
-                    self.object_count[key]=self.object_count[key]+value
-                    self.time_count['x'].append(self.frame_num)
-                    self.time_count['y'].append(value)
+                    #self.object_count[key]=self.object_count[key]+value
+                    #self.time_count['x'].append(self.frame_num)
+                    #self.time_count['y'].append(value)
 
                 #print("# of time {}s detected so far: {}".format(key, object_count[key]))
 
-            image = utils.draw_bbox(frame, pred_bbox, self.object_count, self.time_count, self.is_time_count, self.info, counted_classes, allowed_classes=allowed_classes, read_plate=self.plate)
+            image = utils.draw_bbox(frame, pred_bbox,  self.time_count, self.is_time_count, self.info, counted_classes, allowed_classes=allowed_classes, read_plate=self.plate)
         else:
             image = utils.draw_bbox(frame, pred_bbox, FLAGS.info, allowed_classes=allowed_classes, read_plate=FLAGS.plate)
         

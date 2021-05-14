@@ -44,7 +44,7 @@ flags.DEFINE_boolean('is_time_count',False,    'make time series plot')
 def main(_argv):
 
     #defining dictionary to hold total object counts
-    object_count={}
+    #object_count={}
     time_count={}
     
     frame_num=0
@@ -63,6 +63,7 @@ def main(_argv):
     # by default allow all classes in .names file
     allowed_classes = list(class_names.values())
 
+    '''
     if 'coco' in cfg.YOLO.CLASSES:   #for coco dataset, only considering pizza
         object_count['pizza']=0
         time_count['x']=[]
@@ -71,9 +72,9 @@ def main(_argv):
     else:
         time_count['x']=[]
         time_count['y']=[]
-        for ele in allowed_classes:
-            object_count[ele] =0
-
+        #for ele in allowed_classes:
+            #object_count[ele] =0
+    '''
 
     config = ConfigProto()
     config.gpu_options.allow_growth = True
@@ -179,12 +180,12 @@ def main(_argv):
             # loop through dict and print
             for key, value in counted_classes.items():
                 print("Number of {}s: {}".format(key, value))
-                if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
+                #if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
                    #continue
-                   object_count[key]=object_count[key]+value   
-                   time_count['x'].append(frame_num)
-                   time_count['y'].append(value)
-            image = utils.draw_bbox(original_image, pred_bbox, object_count, time_count, FLAGS.is_time_count, FLAGS.info, counted_classes, allowed_classes=allowed_classes, read_plate = FLAGS.plate)
+                   #object_count[key]=object_count[key]+value   
+                   #time_count['x'].append(frame_num)
+                   #time_count['y'].append(value)
+            image = utils.draw_bbox(original_image, pred_bbox, time_count, FLAGS.is_time_count, FLAGS.info, counted_classes, allowed_classes=allowed_classes, read_plate = FLAGS.plate)
         else:
             image = utils.draw_bbox(original_image, pred_bbox, FLAGS.info, allowed_classes=allowed_classes, read_plate = FLAGS.plate)
         

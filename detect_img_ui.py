@@ -63,7 +63,7 @@ class ImageCamera(object):
         self.recent_output=None    #stores the earliar output
 
         #defining dictionary to hold total object counts
-        self.object_count={}
+        #self.object_count={}
         self.time_count={}
         # read in all class names from config
 
@@ -79,7 +79,8 @@ class ImageCamera(object):
 
         # by default allow all classes in .names file
         allowed_classes = list(class_names.values())
-
+        
+        '''
         if 'coco' in cfg.YOLO.CLASSES:   #for coco dataset, only considering pizza
             self.object_count['pizza']=0
             print('allowed', cfg.YOLO.CLASSES  )
@@ -90,7 +91,7 @@ class ImageCamera(object):
             self.time_count['y']=[]
             for ele in allowed_classes:
                 self.object_count[ele] =0
-
+        '''
 
         config = ConfigProto()
         config.gpu_options.allow_growth = True
@@ -217,17 +218,17 @@ class ImageCamera(object):
             if self.count:
                 # count objects found
                 counted_classes = count_objects(pred_bbox, by_class = True, allowed_classes=allowed_classes)
-                print('counted_classes in main', counted_classes)
+                #print('counted_classes in main', counted_classes)
                 # loop through dict and print
                 for key, value in counted_classes.items():
                     print("Number of {}s: {}".format(key, value))
-                    if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
+                    #if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
                     #continue
-                        self.object_count[key]=self.object_count[key]+value   
-                        self.time_count['x'].append(self.frame_num)
-                        self.time_count['y'].append(value)
+                        #self.object_count[key]=self.object_count[key]+value   
+                        #self.time_count['x'].append(self.frame_num)
+                        #self.time_count['y'].append(value)
                                       #(frame, pred_bbox, self.object_count, self.time_count, self.is_time_count, self.info, counted_classes, allowed_classes=allowed_classes, read_plate=self.plate)
-                image = utils.draw_bbox(original_image, pred_bbox, self.object_count, self.time_count, self.is_time_count, self.info, counted_classes, allowed_classes=allowed_classes, read_plate = self.plate)
+                image = utils.draw_bbox(original_image, pred_bbox, self.time_count, self.is_time_count, self.info, counted_classes, allowed_classes=allowed_classes, read_plate = self.plate)
             else:
                 image = utils.draw_bbox(original_image, pred_bbox, self.info, allowed_classes=allowed_classes, read_plate = FLAGS.plate)
             

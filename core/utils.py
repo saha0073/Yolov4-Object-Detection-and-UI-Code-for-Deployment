@@ -230,7 +230,7 @@ def format_boxes(bboxes, image_height, image_width):
         box[0], box[1], box[2], box[3] = xmin, ymin, xmax, ymax
     return bboxes
 
-def draw_bbox(image, bboxes, count_object, time_count, is_time_count, info = False, counted_classes = None, show_label=True,  allowed_classes=list(read_class_names(cfg.YOLO.CLASSES).values()), read_plate = False):
+def draw_bbox(image, bboxes,  time_count, is_time_count, info = False, counted_classes = None, show_label=True,  allowed_classes=list(read_class_names(cfg.YOLO.CLASSES).values()), read_plate = False):
     #print('counted_classes at begin in utils',counted_classes)
 
     classes = read_class_names(cfg.YOLO.CLASSES)
@@ -317,24 +317,61 @@ def draw_bbox(image, bboxes, count_object, time_count, is_time_count, info = Fal
 
     if is_time_count:
 
-        fig = plt.figure()
-        plt.plot(time_count['x'], time_count['y'])  
-        plt.ylabel('counts')
-        plt.xlabel('frame')
-        # redraw the canvas
-        fig.canvas.draw()
-        imgplt = np.fromstring(fig.canvas.tostring_rgb(), dtype=np.uint8,
-            sep='')
-        imgplt  = imgplt.reshape(fig.canvas.get_width_height()[::-1] + (3,))
-        plt.close()
+        if len(time_count)==1:
+            
+            for key in time_count:
+                key1=key
+            #key0=time_count.keys()[0]
+            print('key1',key1)
 
-        # img is rgb, convert to opencv's default bgr
-        #imgplt = cv2.cvtColor(imgplt,cv2.COLOR_RGB2BGR) 
-        #im_v_resize = vconcat_resize_min([image, imgplt])   #vertical concatanation
-        im_v_resize = hconcat_resize_min([image, imgplt])    #horizontal concatanation
-        #print('width of plt',imgplt.shape)
-        #print('width of image',image.shape)
-        #print('width of concat',im_v_resize.shape)
+            fig = plt.figure()
+            plt.plot(time_count[key1]['x'], time_count[key1]['y'])  
+            plt.ylabel('counts')
+            plt.xlabel('frame')
+            plt.title(key1)
+            # redraw the canvas
+            fig.canvas.draw()
+            imgplt = np.fromstring(fig.canvas.tostring_rgb(), dtype=np.uint8,
+                sep='')
+            imgplt  = imgplt.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+            plt.close()
+
+            # img is rgb, convert to opencv's default bgr
+            #imgplt = cv2.cvtColor(imgplt,cv2.COLOR_RGB2BGR) 
+            #im_v_resize = vconcat_resize_min([image, imgplt])   #vertical concatanation
+            im_v_resize = hconcat_resize_min([image, imgplt])    #horizontal concatanation
+            print('width of plt',imgplt.shape)
+            print('width of image',image.shape)
+            print('width of concat',im_v_resize.shape)
+        
+        elif len(time_count)==2:
+
+            key1,key2=list(time_count.keys())
+
+            fig, (ax1, ax2) = plt.subplots(2, sharex=True)
+            #fig.suptitle('Aligning x-axis using sharex')
+            ax1.set_title(key1)
+            ax2.set_title(key2)
+            ax1.plot(time_count[key1]['x'], time_count[key1]['y'])
+            ax2.plot(time_count[key2]['x'], time_count[key2]['y'])
+            ax1.set(ylabel='count')
+            ax2.set(xlabel='frame',ylabel='count')
+            # redraw the canvas
+            fig.canvas.draw()
+            imgplt = np.fromstring(fig.canvas.tostring_rgb(), dtype=np.uint8,
+                sep='')
+            imgplt  = imgplt.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+            plt.close()
+            im_v_resize = hconcat_resize_min([image, imgplt])    #horizontal concatanation
+            print('width of plt',imgplt.shape)
+            print('width of image',image.shape)
+            print('width of concat',im_v_resize.shape)
+        
+        else:
+            print('check no of classes')
+
+
+
         return im_v_resize
     
     return image

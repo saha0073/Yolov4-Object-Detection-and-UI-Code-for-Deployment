@@ -1,17 +1,6 @@
-<html>
-  <head>
-    <title>Home</title>
-    <style>
-	img {
-  	display: block;
-  	margin-left: auto;
-  	margin-right: auto;
-	width: 35%
-	}
-    </style>
-  </head>
-  <body>
-    <script>
+<!doctype html>
+<html lang="en">
+  <script>
     function showPicture() {
       var sourceOfPicture = "{{ url_for('video_feed') }}";
       var img = document.getElementById('bg')
@@ -19,25 +8,90 @@
       img.style.display = "block";
     } 
   </script>
-    <h1 align="center">Real-Time Object Detection GUI</h1>
-    <form action="{{ url_for('setting_inputs') }}" method="post" >
-      <label for='model'>Weight Name</label>
-      <input type="text" id="weight" name="weight">
-      <label for='file'>File Name</label>
-      <input type="text" id="file" name="file">
-      <input type="submit" value="Load weights & file">
-    </form>
-    <button onclick="showPicture()">Start Object Detection</button>
-     <!--<label for='model'>Model Name</label><br> 
-      <img id="bg" class="center" src="{{ url_for('video_feed') }}" width="1130"  height="636">
-     screen resolution 1920 X 1080 
-    <input type=text name="yolo">
-    width=1130
-    -->  
-<div>
-     <img id="bg" class="center" src="http://img.tesco.com/Groceries/pi/118/5000175411118/IDShot_90x90.jpg"  style="display:none;width:80%">
-       
-    </div>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="cccc.png" rel="icon">
+        <link href="cccc.png" rel="apple-touch-icon">
+      
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+        <title>Yolo</title>
+        <style>
+            .fixed-footer{
+                width: 100%;
+                text-align: center;
+                position: fixed;
+                padding: 50px 0;
+                color: black;
+                
+            }
+        
+            .fixed-footer{
+                bottom: 0;
+            }
+        </style>
 
-  </body>
+    </head>
+    <body >
+        <div class="align-items-center light-blue-gradient " style="height: 100vh ;">
+        
+            <div class="container" >
+                <h1  style="text-align: center; font-family: Poppins;font-weight: 600 ; padding-top: 5%;">Real-Time Object Detection with Yolo</h1>
+                
+                
+                <div class='align-items-center'>
+                  
+                  <form action="{{ url_for('setting_inputs') }}" method="post" >
+
+                    <div class='row mt-5 '>
+                    <div class=" col form-group ">
+                      <label for="model" class="h3 mb-3 font-weight-normal">Weight Name</label><br>
+                  
+                      <select name="weight" class="h4 ml-1 mb-3 font-weight-normal" id="weight" required="required">
+                          <option value="./checkpoints/yolov4-416">yolov4-Pizza</option>
+                          <option value="./checkpoints/yolov4-custom_tire_2000-416">yolov4-Tire</option>
+                          <option value="./checkpoints/yolov4-obj_cup_last-416">yolov4-Cup</option> 
+                      </select>
+                      
+                  </div>
+                  
+                  <div class="col form-group ">
+                    <label for="file" class="h3 mb-3 mt-2 ml-5 font-weight-normal">File Name</label>
+                
+                    <input type="file" class="h5  " id="file" name="file" required autofocus>
+                    
+                </div>
+                <button class="btn  btn-primary form-group btn-md ml-3" type="submit">Load weights & File </button><br>
+                </div>
+                
+                  </form>
+                  <div class='center'>
+                    <button class=" btn btn-lg btn-primary mr-3" onclick="showPicture()" type="submit">Start Object Detection</button>
+      
+
+                  </div>
+                  
+                 
+    </div>
+</div>
+<div>
+  <div class='align-items-center'>
+  <img id="bg" class="center mt-3" src="http://img.tesco.com/Groceries/pi/118/5000175411118/IDShot_90x90.jpg"  style="display:none;width:80%">
+</div>
+</div>
+
+                </div>
+        
+
+                <!-- Optional JavaScript -->
+                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+            </div>
+    </body>
 </html>
+
