@@ -76,7 +76,7 @@ python main_ui.py
 <p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/ui.png"\></p>
 
 
-<!--This project has been inspired by [AIGuys](https://github.com/theAIGuysCode), so I would like to thank him. If you have any question please feel free to connect me in [Linkedin](https://www.linkedin.com/in/subhodip-saha-li/)-->
+This project has been inspired by [AIGuys](https://github.com/theAIGuysCode), so I would like to thank him. If you have any question please feel free to connect me in [Linkedin](https://www.linkedin.com/in/subhodip-saha-li/)
 Happy Learning!
 
 
