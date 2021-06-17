@@ -117,6 +117,7 @@ def main(_argv):
         if FLAGS.is_time_count:
             if 'cup' in cfg.YOLO.CLASSES: 
                 out = cv2.VideoWriter(FLAGS.output, codec, fps, (width+621, height))  #in cup the video is wide, so this modification
+                #out = cv2.VideoWriter(FLAGS.output, codec, fps, (1493, 480))  #in cup the video is wide, so this modification
             else:
                 out = cv2.VideoWriter(FLAGS.output, codec, fps, (width+640, height))  #the width of plt
         else: 
