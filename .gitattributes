@@ -1,0 +1,4 @@
+*.xyz filter=lfs diff=lfs merge=lfs -text
+*.bin filter=lfs diff=lfs merge=lfs -text
+*.optim filter=lfs diff=lfs merge=lfs -text
+*.js linguist-vendored

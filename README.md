@@ -66,8 +66,8 @@ python main_ui.py
 
 ### GUI Navigation
 * The Flask app will be running from 5000 port, so please go to `localhost:5000` in your browser
-* Import the weights and image/video: You can use `./checkpoints/yolov4-416` in place of weights, `./data/images/pizza_radmaker2.png` in file and press Load weights & file button, it will import the yolov4 weights and the pizza video in the backend. 
-* Press start object detection button, the object detection will start in GUI in a few seconds.
+* Import the weights and image/video: You can select `yolov4-Pizza` in the weights dropdown, choose `pizza_radmaker1.mp4` for filename and press `Load weights & file` button, it will import the yolov4 weights and the pizza video in the backend. 
+* Press `start object detection button`, the object detection will start in GUI in a few seconds.
 * It creates the time-series analysis plot for video input files, this feature can be switched on/off by setting `is_time_count` to `True/False` in main_ui.py.
 
 
@@ -76,7 +76,7 @@ python main_ui.py
 <p align="center"><img src="https://github.com/saha0073/Yolov4-Object-Detection-and-Custom-UI/blob/main/saved_detections/ui.png"\></p>
 
 
-<!--This project has been inspired by [AIGuys](https://github.com/theAIGuysCode), so I like to thank him. If you have any question please feel free to connect me in [Linkedin](https://www.linkedin.com/in/subhodip-saha-li/)-->
+This project has been inspired by [AIGuys](https://github.com/theAIGuysCode), so I would like to thank him. If you have any question please feel free to connect me in [Linkedin](https://www.linkedin.com/in/subhodip-saha-li/).
 Happy Learning!
 
 
