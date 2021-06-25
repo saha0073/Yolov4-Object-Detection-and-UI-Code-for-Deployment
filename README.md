@@ -37,14 +37,26 @@ The original Darknet model weights are available online. Due to large size of th
 
 ```plain
 └── Yolov4-Object-Detection-and-Custom-UI
-       ├── training   <-- training data
-       |   ├── image_2
-       |   ├── label_2
-       |   └── velodyne
-       └── validation  <--- evaluation data
-       |   ├── image_2
-       |   ├── label_2
-       |   └── velodyne
+       ├── checkpoints   <-- contains trained models
+       |   ├── yolov4-416
+       |   ├── yolov4-custom_tire_2000-416
+       |   └── yolov4-obj_cup_last-416
+       ├── core  < -- contains utility functions 
+       |   └── utils.py
+       ├── data   <-- contains images/videos for input to UI
+       |   ├── classes
+       |   ├── images
+       |   └── videos
+       ├── detections 
+       ├── saved_detections <-- few examples
+       ├── static
+       ├── templates
+       |   └── index.html   <-- responsible for UI
+       ├── detect_img_ui.py
+       ├── detect_video_ui.py
+       ├── main_ui.py
+       └── requirements.txt
+       
 ```  
 
 <!--### Conda (Recommended)
