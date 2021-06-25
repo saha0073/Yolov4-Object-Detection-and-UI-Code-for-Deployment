@@ -4,6 +4,8 @@ detections/
 __pycache_/
 __pycache*
 .ipynb_checkpoints/
+detections/defective_cups.pptx
+
 
 
 
