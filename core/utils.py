@@ -246,12 +246,14 @@ def draw_bbox(image, bboxes,  time_count, is_time_count, info = False, counted_c
 
     out_boxes, out_scores, out_classes, num_boxes = bboxes
     offset=15
+    '''
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     cv2.putText(image, "Time: {}".format(current_time), (5, offset),
                             cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
     height_ratio=int(image_h / 25)
     offset += height_ratio
+    '''
     '''
     for key in count_object:
         cv2.putText(image, "No. of times {} detected so far: {}".format(key, count_object[key]), (5, offset),
@@ -268,10 +270,21 @@ def draw_bbox(image, bboxes,  time_count, is_time_count, info = False, counted_c
         score = out_scores[i]
         class_ind = int(out_classes[i])
         class_name = classes[class_ind]
+        '''
+        ##### changed the class names, please revert later
+        if class_name=='cup':
+            class_name='good_cup'
+        if class_name=='defective_cup':
+            class_name='broken_cup'
+        ########
+        '''
+
+        #print('class_name',class_name)
+        #print('len',len(class_name))
         ###############
         #print('changed here: allowed_clases')
         #if class_name not in allowed_classes:
-        if class_name not in ['pizza', 'tire', 'cup', 'defective_cup']: 
+        if class_name not in ['pizza', 'tire', 'cup', 'defective_cup','good_cup', 'broken_cup']: 
             continue
             ############  #changed here: allowed class names
         else:
@@ -299,7 +312,10 @@ def draw_bbox(image, bboxes,  time_count, is_time_count, info = False, counted_c
                 cv2.putText(image, bbox_mess, (c1[0], np.float32(c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX,
                         fontScale, (0, 0, 0), bbox_thick // 2, lineType=cv2.LINE_AA)
 
-            #print('counted_classes',counted_classes)
+            
+
+            print('counted_classes',counted_classes)
+        
             if counted_classes != None:
                 height_ratio = int(image_h / 25)
                 offset = offset_base
@@ -307,7 +323,7 @@ def draw_bbox(image, bboxes,  time_count, is_time_count, info = False, counted_c
                 i=0
                 for key, value in counted_classes.items():    
                     #print('ilater', i, key, value)
-                    if key in ['pizza', 'tire', 'cup', 'defective_cup']: 
+                    if key in ['pizza', 'tire', 'cup', 'defective_cup','good_cup','broken_cup']: 
                         #continue
                         cv2.putText(image, "{}s detected: {}".format(key, value), (5, offset),
                             cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 255, 0), 2)

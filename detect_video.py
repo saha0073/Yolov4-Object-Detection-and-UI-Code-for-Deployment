@@ -35,7 +35,7 @@ flags.DEFINE_boolean('info', False, 'print info on detections')
 flags.DEFINE_boolean('crop', False, 'crop detections from images')
 flags.DEFINE_boolean('plate', False, 'perform license plate recognition')
 flags.DEFINE_boolean('tabulation', False, 'print tabulation on screen')
-flags.DEFINE_boolean('is_time_count',True, 'make time series plot')
+flags.DEFINE_boolean('is_time_count',False, 'make time series plot')
 
 def main(_argv):
     #defining dictionary to hold total object counts
@@ -116,7 +116,8 @@ def main(_argv):
         codec = cv2.VideoWriter_fourcc(*FLAGS.output_format)
         if FLAGS.is_time_count:
             if 'cup' in cfg.YOLO.CLASSES: 
-                out = cv2.VideoWriter(FLAGS.output, codec, fps, (width+621, height))  #in cup the video is wide, so this modification
+                #out = cv2.VideoWriter(FLAGS.output, codec, fps, (width+621, height))  #in cup the video is wide, so this modification #621 comes from time-series plot
+                out = cv2.VideoWriter(FLAGS.output, codec, fps, (width, height))
                 #out = cv2.VideoWriter(FLAGS.output, codec, fps, (1493, 480))  #in cup the video is wide, so this modification
             else:
                 out = cv2.VideoWriter(FLAGS.output, codec, fps, (width+640, height))  #the width of plt
@@ -204,6 +205,12 @@ def main(_argv):
         if FLAGS.count:
             # count objects found
             counted_classes = count_objects(pred_bbox, by_class = True, allowed_classes=allowed_classes)
+            '''
+            if 'cup' in counted_classes:
+                counted_classes['good_cup']=counted_classes.pop('cup')
+            if 'defective_cup' in counted_classes:
+                counted_classes['broken_cup']=counted_classes.pop('defective_cup')
+                '''
             # loop through dict and print
             print('counted_classes',counted_classes)
             for key in time_count:
