@@ -1,7 +1,7 @@
-# yolov4-Object-Detection-and-Custom-UI
+# yolov4-Object-Detection-and-UI-Code-for-Deployment
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
-This repo contains a wide range of custom functions & UI code for real-time detection & analysis of objects using YOLOv4. The UI can take a video (or CCTV streaming) as input, and object detection output will be streamed in UI, along with time series count. Ready for deployment in the GPU servers for real-time custom object detection.
+This repo contains a wide range of custom functions & UI code for real-time detection & analysis of objects using YOLOv4. The UI can take a video (or CCTV streaming) as input, and will stream the output object detection in UI, along with time series count. Ready for deployment in the GPU servers for real-time custom object detection.
 
 ## Techniques Used
 * Modeling Techniques: CNN object detection, Darknet53, Yolov4, Transfer Learning, Computer Vision.
