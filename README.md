@@ -7,7 +7,7 @@ This repo contains a wide range of custom functions & UI code for real-time dete
 * Modeling Techniques: CNN object detection, Darknet53, Yolov4, Transfer Learning, Computer Vision.
 * Image & Video processing techniques: Opencv, GStreamer
 * Tech Stack: Python. 
-* Libraries: Tensorflow 2.3.0, Keras, Scikit-Learn, matplotlib.
+* Libraries: Tensorflow 2.3.0, Scikit-Learn, Keras, matplotlib.
 * GUI techniques: Flask, HTML, JavaScript, RTSP.   
 
 ## A demo of the detection & analysis of objects on conveyor belt!
